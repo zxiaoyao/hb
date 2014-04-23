@@ -1,0 +1,152 @@
+\hypertarget{hb_8cpp}{\section{src/hb.cpp File Reference}
+\label{hb_8cpp}\index{src/hb.\-cpp@{src/hb.\-cpp}}
+}
+{\ttfamily \#include \char`\"{}mcce.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$cstdlib$>$}\\*
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$cmath$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$set$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$fstream$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{hb_8cpp_a3eebbacd4414363e7bc2c726f99a2b7b}{is\-\_\-hb} (const C\-O\-N\-F $\ast$conf1, const C\-O\-N\-F $\ast$conf2, ofstream \&h\-\_\-fp)
+\begin{DoxyCompactList}\small\item\em Determine if there is hydrogen bond between two conformers. \end{DoxyCompactList}\item 
+int \hyperlink{hb_8cpp_a5929d7b4f6310b0601305d0a64a9558d}{load\-\_\-head3lst} (R\-E\-S \&conflist)
+\begin{DoxyCompactList}\small\item\em Load conformers from head3.\-lst. \end{DoxyCompactList}\item 
+int \hyperlink{hb_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const string \hyperlink{hb_8cpp_a7ef58723d2c53ed85e7b8572e18f95cc}{P\-D\-B\-F} = \char`\"{}step2\-\_\-out.\-pdb\char`\"{}
+\begin{DoxyCompactList}\small\item\em step2\-\_\-out.\-pdb from M\-C\-C\-E. \end{DoxyCompactList}\item 
+const string \hyperlink{hb_8cpp_a722392e8bfa0af5e3ac225ff7427f7d4}{H\-B\-O\-U\-T} = \char`\"{}hb.\-dat\char`\"{}
+\begin{DoxyCompactList}\small\item\em a binary file to save a n$\ast$n matrix of info about hbond between two conformers. \end{DoxyCompactList}\item 
+const string \hyperlink{hb_8cpp_a75a7358905131c9f71fadb1bdbb26516}{H\-B\-T\-X\-T} = \char`\"{}hah.\-txt\char`\"{}
+\begin{DoxyCompactList}\small\item\em a text file to store the hbond connection between conformers. \end{DoxyCompactList}\item 
+const string \hyperlink{hb_8cpp_a07ce88ed891e5f26e617f7e7f4d37eed}{R\-E\-S\-H\-B\-O\-N\-D} = \char`\"{}reshbond.\-txt\char`\"{}
+\begin{DoxyCompactList}\small\item\em each line represents an edge of hb network of residues. \end{DoxyCompactList}\item 
+const string \hyperlink{hb_8cpp_a514238ed2f338e7474ed24fbfee3bd1d}{R\-E\-S\-\_\-\-I\-N\-\_\-\-H\-B\-N\-E\-T} = \char`\"{}res\-In\-Hb\-Net.\-txt\char`\"{}
+\begin{DoxyCompactList}\small\item\em all the residues in hb network. \end{DoxyCompactList}\item 
+const float \hyperlink{hb_8cpp_a27a94fe55504eb14549dd441c148df40}{D\-F\-A\-R} = 3.\-2
+\begin{DoxyCompactList}\small\item\em the distance used to determine a hydrogen bond \end{DoxyCompactList}\item 
+const float \hyperlink{hb_8cpp_a992ec6a5a96de6891bdd38a998547415}{D\-N\-E\-A\-R} = 1.\-2
+\item 
+const float \hyperlink{hb_8cpp_aa08a577393243b86dfd2a97e61443673}{P\-I} = 3.\-1415926
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{hb_8cpp_a3eebbacd4414363e7bc2c726f99a2b7b}{\index{hb.\-cpp@{hb.\-cpp}!is\-\_\-hb@{is\-\_\-hb}}
+\index{is\-\_\-hb@{is\-\_\-hb}!hb.cpp@{hb.\-cpp}}
+\subsubsection[{is\-\_\-hb}]{\setlength{\rightskip}{0pt plus 5cm}bool is\-\_\-hb (
+\begin{DoxyParamCaption}
+\item[{const C\-O\-N\-F $\ast$}]{conf1, }
+\item[{const C\-O\-N\-F $\ast$}]{conf2, }
+\item[{ofstream \&}]{h\-\_\-fp}
+\end{DoxyParamCaption}
+)}}\label{hb_8cpp_a3eebbacd4414363e7bc2c726f99a2b7b}
+
+
+Determine if there is hydrogen bond between two conformers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em conf1} & first conformer. \\
+\hline
+{\em conf2} & the second conformer. \\
+\hline
+{\em h\-\_\-fp} & an out file stream to write the actual hydrogen bond connection in.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if there is no hydrogen bond, 1 if there is. 
+\end{DoxyReturn}
+To establish hydrogen bond between two conformers, the following criteria must be met\-:
+\begin{DoxyEnumerate}
+\item one conformer is h donor, the other is acceptor.
+\item the distance between one donor atom (H) and one acceptor atom (O, N) is between D\-N\-E\-A\-R and D\-F\-A\-R.
+\item the angle of h bond should be no less than 90.
+\end{DoxyEnumerate}\hypertarget{hb_8cpp_a5929d7b4f6310b0601305d0a64a9558d}{\index{hb.\-cpp@{hb.\-cpp}!load\-\_\-head3lst@{load\-\_\-head3lst}}
+\index{load\-\_\-head3lst@{load\-\_\-head3lst}!hb.cpp@{hb.\-cpp}}
+\subsubsection[{load\-\_\-head3lst}]{\setlength{\rightskip}{0pt plus 5cm}int load\-\_\-head3lst (
+\begin{DoxyParamCaption}
+\item[{R\-E\-S \&}]{conflist}
+\end{DoxyParamCaption}
+)}}\label{hb_8cpp_a5929d7b4f6310b0601305d0a64a9558d}
+
+
+Load conformers from head3.\-lst. 
+
+To compare the conformers in head3.\-lst and step2\-\_\-out.\-pdb. They should be consistent.
+
+
+\begin{DoxyParams}{Parameters}
+{\em conflist} & a list of conformers loaded from head3.\-lst\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if succeed 
+\end{DoxyReturn}
+\hypertarget{hb_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{\index{hb.\-cpp@{hb.\-cpp}!main@{main}}
+\index{main@{main}!hb.cpp@{hb.\-cpp}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{hb_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}
+
+
+\subsection{Variable Documentation}
+\hypertarget{hb_8cpp_a27a94fe55504eb14549dd441c148df40}{\index{hb.\-cpp@{hb.\-cpp}!D\-F\-A\-R@{D\-F\-A\-R}}
+\index{D\-F\-A\-R@{D\-F\-A\-R}!hb.cpp@{hb.\-cpp}}
+\subsubsection[{D\-F\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}const float D\-F\-A\-R = 3.\-2}}\label{hb_8cpp_a27a94fe55504eb14549dd441c148df40}
+
+
+the distance used to determine a hydrogen bond 
+
+\hypertarget{hb_8cpp_a992ec6a5a96de6891bdd38a998547415}{\index{hb.\-cpp@{hb.\-cpp}!D\-N\-E\-A\-R@{D\-N\-E\-A\-R}}
+\index{D\-N\-E\-A\-R@{D\-N\-E\-A\-R}!hb.cpp@{hb.\-cpp}}
+\subsubsection[{D\-N\-E\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}const float D\-N\-E\-A\-R = 1.\-2}}\label{hb_8cpp_a992ec6a5a96de6891bdd38a998547415}
+\hypertarget{hb_8cpp_a722392e8bfa0af5e3ac225ff7427f7d4}{\index{hb.\-cpp@{hb.\-cpp}!H\-B\-O\-U\-T@{H\-B\-O\-U\-T}}
+\index{H\-B\-O\-U\-T@{H\-B\-O\-U\-T}!hb.cpp@{hb.\-cpp}}
+\subsubsection[{H\-B\-O\-U\-T}]{\setlength{\rightskip}{0pt plus 5cm}const string H\-B\-O\-U\-T = \char`\"{}hb.\-dat\char`\"{}}}\label{hb_8cpp_a722392e8bfa0af5e3ac225ff7427f7d4}
+
+
+a binary file to save a n$\ast$n matrix of info about hbond between two conformers. 
+
+\hypertarget{hb_8cpp_a75a7358905131c9f71fadb1bdbb26516}{\index{hb.\-cpp@{hb.\-cpp}!H\-B\-T\-X\-T@{H\-B\-T\-X\-T}}
+\index{H\-B\-T\-X\-T@{H\-B\-T\-X\-T}!hb.cpp@{hb.\-cpp}}
+\subsubsection[{H\-B\-T\-X\-T}]{\setlength{\rightskip}{0pt plus 5cm}const string H\-B\-T\-X\-T = \char`\"{}hah.\-txt\char`\"{}}}\label{hb_8cpp_a75a7358905131c9f71fadb1bdbb26516}
+
+
+a text file to store the hbond connection between conformers. 
+
+\hypertarget{hb_8cpp_a7ef58723d2c53ed85e7b8572e18f95cc}{\index{hb.\-cpp@{hb.\-cpp}!P\-D\-B\-F@{P\-D\-B\-F}}
+\index{P\-D\-B\-F@{P\-D\-B\-F}!hb.cpp@{hb.\-cpp}}
+\subsubsection[{P\-D\-B\-F}]{\setlength{\rightskip}{0pt plus 5cm}const string P\-D\-B\-F = \char`\"{}step2\-\_\-out.\-pdb\char`\"{}}}\label{hb_8cpp_a7ef58723d2c53ed85e7b8572e18f95cc}
+
+
+step2\-\_\-out.\-pdb from M\-C\-C\-E. 
+
+\hypertarget{hb_8cpp_aa08a577393243b86dfd2a97e61443673}{\index{hb.\-cpp@{hb.\-cpp}!P\-I@{P\-I}}
+\index{P\-I@{P\-I}!hb.cpp@{hb.\-cpp}}
+\subsubsection[{P\-I}]{\setlength{\rightskip}{0pt plus 5cm}const float P\-I = 3.\-1415926}}\label{hb_8cpp_aa08a577393243b86dfd2a97e61443673}
+\hypertarget{hb_8cpp_a514238ed2f338e7474ed24fbfee3bd1d}{\index{hb.\-cpp@{hb.\-cpp}!R\-E\-S\-\_\-\-I\-N\-\_\-\-H\-B\-N\-E\-T@{R\-E\-S\-\_\-\-I\-N\-\_\-\-H\-B\-N\-E\-T}}
+\index{R\-E\-S\-\_\-\-I\-N\-\_\-\-H\-B\-N\-E\-T@{R\-E\-S\-\_\-\-I\-N\-\_\-\-H\-B\-N\-E\-T}!hb.cpp@{hb.\-cpp}}
+\subsubsection[{R\-E\-S\-\_\-\-I\-N\-\_\-\-H\-B\-N\-E\-T}]{\setlength{\rightskip}{0pt plus 5cm}const string R\-E\-S\-\_\-\-I\-N\-\_\-\-H\-B\-N\-E\-T = \char`\"{}res\-In\-Hb\-Net.\-txt\char`\"{}}}\label{hb_8cpp_a514238ed2f338e7474ed24fbfee3bd1d}
+
+
+all the residues in hb network. 
+
+\hypertarget{hb_8cpp_a07ce88ed891e5f26e617f7e7f4d37eed}{\index{hb.\-cpp@{hb.\-cpp}!R\-E\-S\-H\-B\-O\-N\-D@{R\-E\-S\-H\-B\-O\-N\-D}}
+\index{R\-E\-S\-H\-B\-O\-N\-D@{R\-E\-S\-H\-B\-O\-N\-D}!hb.cpp@{hb.\-cpp}}
+\subsubsection[{R\-E\-S\-H\-B\-O\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}const string R\-E\-S\-H\-B\-O\-N\-D = \char`\"{}reshbond.\-txt\char`\"{}}}\label{hb_8cpp_a07ce88ed891e5f26e617f7e7f4d37eed}
+
+
+each line represents an edge of hb network of residues. 
+
