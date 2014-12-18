@@ -3,6 +3,7 @@
 	<name>hb</name>
 	<comment></comment>
 	<projects>
+		<project>mcce</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

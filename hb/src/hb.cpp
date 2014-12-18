@@ -53,6 +53,8 @@ int main()
 
 
 	// load head3.lst to check with the conformers loaded from step2_out.pdb
+	// **The conformer number in "step2_out.pdb" and "head3.lst" can be different,
+	//   due to the dummy conformers which may be added in step 3. **
 	RES conflist;
 	load_head3lst(conflist);
 	int n_conf = conflist.n_conf;
@@ -61,7 +63,7 @@ int main()
 		for (int j=1; j<prot.res[i].n_conf; j++) {
 			strncpy(prot.res[i].conf[j].confName, prot.res[i].conf[j].uniqID, 5);
 			prot.res[i].conf[j].confName[5] = '\0';
-			// adjust the conf id to avoid id diff between step2 and head3.lst
+			// *** adjust the conf id to avoid id diff between step2 and head3.lst ***
 			for (int k=0; k<n_conf; k++) {
 				if (!strcmp(conflist.conf[k].uniqID, prot.res[i].conf[j].uniqID)) {
 					prot.res[i].conf[j].iConf = conflist.conf[k].iConf;
@@ -72,14 +74,14 @@ int main()
 	}
 
 
-	ofstream h_fp(HBTXT, ios::out);
+	ofstream h_fp(HBTXT.c_str(), ios::out);
 
 	// hb_fp is a binary file to store the hbpw matrix, the first 4 bytes give the conformer number n_conf
-	ofstream hb_fp(HBOUT, ios::out|ios::binary);
+	ofstream hb_fp(HBOUT.c_str(), ios::out|ios::binary);
 	hb_fp.write((char *)&n_conf, sizeof(int));
 
 	// hbpw is a matrix to store the hb connection between each two conf, the elem is 0 or 1
-	ofstream fp_res(RESHBOND, ios::out);
+	ofstream fp_res(RESHBOND.c_str(), ios::out);
 	char *resHb = (char *) calloc(prot.n_res * prot.n_res, sizeof(char));
 
 	char *hbpw = (char *) calloc(n_conf * n_conf, sizeof(char));
@@ -124,7 +126,7 @@ int main()
 	}
 	fp_res.close();
 
-	ofstream fp_resInHbNet(RES_IN_HBNET, ios::out);
+	ofstream fp_resInHbNet(RES_IN_HBNET.c_str(), ios::out);
 	for (int i_res=0; i_res<prot.n_res; i_res++) {
 		if (resInHbNet.find(i_res) != resInHbNet.end()) {
 			fp_resInHbNet << prot.res[i_res].resName << prot.res[i_res].chainID;
@@ -138,7 +140,6 @@ int main()
 	db_close();
 
 	cout << " Number of residues loaded: " << prot.n_res << endl;
-
 
 
 	return 0;
@@ -166,7 +167,7 @@ bool is_hb(const CONF *conf1, const CONF *conf2, ofstream &h_fp)
 	 * 3. the angle of h bond should be no less than 90.
 	 */
 	// the hydrogen donor in hb.tpl file is a hydrogen atom.
-	if (!param_get("HDONOR", conf1->confName, "", &Datoms)) {
+	if (!param_get(const_cast<char*>("HDONOR"), conf1->confName, "", &Datoms)) {
 		if (!param_get("HACCEPT", conf2->confName, "", &Aatoms)) {
 			for (iD=0; iD<Datoms.n; iD++) {
 				param_get("IATOM", conf1->confName, Datoms.strings[iD], &Dseq);

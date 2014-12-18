@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?fileVersion 4.0.0?>
-
-<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="cdt.managedbuild.config.gnu.macosx.exe.debug.513822354">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.macosx.exe.debug.513822354" moduleId="org.eclipse.cdt.core.settings" name="Debug">
@@ -27,10 +25,12 @@
 									<listOptionValue builtIn="false" value="gdbm"/>
 									<listOptionValue builtIn="false" value="m"/>
 									<listOptionValue builtIn="false" value="z"/>
-									<listOptionValue builtIn="false" value="mccecpp"/>
+									<listOptionValue builtIn="false" value="mcce"/>
 								</option>
 								<option id="macosx.cpp.link.option.paths.1997536855" name="Library search path (-L)" superClass="macosx.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/mccecpp/lib}&quot;"/>
+									<listOptionValue builtIn="false" value="/home/xzhu/local/include/lib"/>
+									<listOptionValue builtIn="false" value="/home/xzhu/local/zlib/lib"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/mcce/lib}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.macosx.cpp.linker.input.1218786710" superClass="cdt.managedbuild.tool.macosx.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -46,7 +46,7 @@
 								<option id="gnu.cpp.compiler.macosx.exe.debug.option.debugging.level.158525600" name="Debug Level" superClass="gnu.cpp.compiler.macosx.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.files.1904949276" name="Include files (-include)" superClass="gnu.cpp.compiler.option.include.files"/>
 								<option id="gnu.cpp.compiler.option.include.paths.231960445" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/mccecpp/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/mcce/include}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1269785804" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
@@ -59,7 +59,15 @@
 					</folderInfo>
 				</configuration>
 			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="mcce;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+					<externalSetting>
+						<entry flags="RESOLVED" kind="libraryPath" name="/usr/lib/x86_64-redhat-linux5E/lib64"/>
+						<entry flags="RESOLVED" kind="libraryPath" name="/home/xzhu/local/include/lib"/>
+						<entry flags="RESOLVED" kind="libraryPath" name="/home/xzhu/local/zlib/lib"/>
+					</externalSetting>
+				</externalSettings>
+			</storageModule>
 		</cconfiguration>
 		<cconfiguration id="cdt.managedbuild.config.macosx.exe.release.410618444">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.macosx.exe.release.410618444" moduleId="org.eclipse.cdt.core.settings" name="Release">
@@ -145,5 +153,17 @@
 		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/hb"/>
 		</configuration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
+		<buildTargets>
+			<target name="all" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+				<buildCommand>make</buildCommand>
+				<buildArguments/>
+				<buildTarget>all</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>true</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+		</buildTargets>
 	</storageModule>
 </cproject>
